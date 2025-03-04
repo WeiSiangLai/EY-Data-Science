@@ -1,0 +1,70 @@
+Predictions
+Note that xgboost, lightgbm and catboost gpu are trained with rmse loss
+
+1. TabPFN
+Cross validation score for TabPFN: 0.960 +- 0.003
+array([0.95982623, 0.95398917, 0.96111125, 0.9644402 , 0.95892458])
+
+2. Ridge Regression
+Best params for Ridge: {'alpha': 9.770438041214875}
+Best cross validation score for Ridge is: 0.251
+
+3. ElasticNet Regression
+Best params for Elasticnet: {'alpha': 0.10044396106012954, 'l1_ratio': 0.021920833336170585}
+Best cross validation score for Elasticnet is: 0.246
+
+4. Lasso Regression
+Best params for Lasso: {'alpha': 0.10042305073139411}
+Best cross validation score for Lasso is: 0.222
+
+5. Polynomial Regression
+Best cross validation score: 0.5425485242067619
+Best hyperparameters: {'degree': 5, 'regularization': 'Ridge', 'alpha': 0.46505593544406193}
+
+6. KNN Regression
+Best KNN Hyperparameters: {'n_neighbors': 4, 'weights': 'distance', 'p': 1, 'leaf_size': 50}
+Best cross validation score is: 0.7102999223663334
+
+7. Support Vector Regression
+Best SVR Hyperparameters: {'kernel': 'rbf', 'C': 6.590581539968622, 'epsilon': 0.010162873785720157, 'gamma': 0.004562323749184101}
+Best cross validation score is: 0.09836642760460727
+
+8. HistGradientBoostingRegressor (cpu only)
+Best HistGB hyperparameters: {'max_iter': 827, 'learning_rate': 0.04098138314325556, 'max_leaf_nodes': 195, 'min_samples_leaf': 3, 'l2_regularization': 0.0012330838337428836, 'max_bins': 255, 'max_depth': 17}
+Best cross validation score is: 0.928407052902992
+
+9. XGBoost (with cpu)
+Best XGBoost Hyperparameters: {'n_estimators': 929, 'learning_rate': 0.02369323116809182, 'max_depth': 8, 'min_child_weight': 20, 'subsample': 0.5496473486351399, 'colsample_bytree': 0.8765633680130848, 'gamma': 2.9084873981881625e-05, 'reg_alpha': 0.004311870214873333, 'reg_lambda': 0.6153233077085383}
+Best cross validation score is: 0.8827264844979714
+
+Minimise rmse:
+Best XGBoost Hyperparameters: {'n_estimators': 699, 'learning_rate': 0.0351803977689901, 'max_depth': 12, 'min_child_weight': 9, 'subsample': 0.6309830335978341, 'colsample_bytree': 0.8568730940159411, 'gamma': 6.99133135632368e-05, 'reg_alpha': 0.009686997812672663, 'reg_lambda': 0.013735681582042395}
+Best rmse score is: 0.005567731819910675
+Corresponding r2 score: 0.882 +- 0.005
+
+10. LightGBM (with cpu)
+Best LightGBM Hyperparameters: {'boosting_type': 'goss', 'n_estimators': 343, 'learning_rate': 0.1925490624453283, 'num_leaves': 146, 'max_depth': 12, 'min_data_in_leaf': 40, 'feature_fraction': 0.7674729616718097, 'lambda_l1': 0.01898454965559412, 'lambda_l2': 4.692232030036839, 'top_rate': 0.3194947877361741, 'other_rate': 0.4966928167965162}
+Best rmse score is: 0.0048567358055995775
+Corresponding r2 score: 0.911 +- 0.005
+
+11. AdaBoost
+Best AdaBoost hyperparameters: {'n_estimators': 396, 'learning_rate': 0.241269347132887, 'loss': 'square', 'max_depth': 10, 'min_samples_split': 5, 'min_samples_leaf': 2}
+Best cross validation score: 0.9084686082271792
+
+12. CatBoost (with cpu and r2 metric)
+
+13. XGBoost (with gpu)
+
+14. XGBoost (with gpu_hist) (according to gpt, functionally same as histgb)
+Best XGBoost Hyperparameters: {'n_estimators': 597, 'learning_rate': 0.06432918137707686, 'max_depth': 12, 'min_child_weight': 13, 'subsample': 0.668084348325135, 'colsample_bytree': 0.5495472597692064, 'gamma': 9.707716063981996e-05, 'reg_alpha': 0.0004036303927989072, 'reg_lambda': 0.08584927589324955}
+Best cross validation rmse score is: 0.006092353745313405
+Corresponding r2 score: 0.863 +- 0.007
+
+15. LightGBM (with gpu)
+Best LightGBM Hyperparameters: {'boosting_type': 'goss', 'n_estimators': 208, 'learning_rate': 0.4123293671983422, 'num_leaves': 162, 'max_depth': 13, 'min_data_in_leaf': 3, 'feature_fraction': 0.9574441515599778, 'lambda_l1': 0.009030326892280713, 'lambda_l2': 6.481443245871898, 'top_rate': 0.4812929352424637, 'other_rate': 0.32728481082449334}
+Best cross validation rmse score is: 0.004772339065746232
+Corresponding r2 score: 0.910 +- 0.002
+
+16. CatBoost (with gpu and rmse as metric becuz r2 is not implemented on gpu)
+Trial 2 finished with value: 0.005620326200408872 and parameters: {'iterations': 951, 'learning_rate': 0.16335650868534068, 'depth': 9, 'l2_leaf_reg': 8.524969214975988, 'bagging_temperature': 0.9886639390498637, 'border_count': 113, 'random_strength': 1.15059031650201, 'leaf_estimation_iterations': 5, 'min_data_in_leaf': 19}. Best is trial 2 with value: 0.005620326200408872.
+
