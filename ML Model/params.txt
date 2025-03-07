@@ -42,6 +42,11 @@ Best XGBoost Hyperparameters: {'n_estimators': 699, 'learning_rate': 0.035180397
 Best rmse score is: 0.005567731819910675
 Corresponding r2 score: 0.882 +- 0.005
 
+Second run (after fixing scaling mistake):
+Best XGBoost Hyperparameters: {'n_estimators': 992, 'learning_rate': 0.04797083882936027, 'max_depth': 15, 'min_child_weight': 16, 'subsample': 0.7271451751629711, 'colsample_bytree': 0.6619890958388478, 'gamma': 7.274439435084388e-06, 'reg_alpha': 0.08060428197611727, 'reg_lambda': 0.0009665472909503505}
+Best cross validation rmse score is: 0.005548935899228149
+Cross validation r2 score is: 0.883 +- 0.006
+
 10. LightGBM (with cpu)
 Best LightGBM Hyperparameters: {'boosting_type': 'goss', 'n_estimators': 343, 'learning_rate': 0.1925490624453283, 'num_leaves': 146, 'max_depth': 12, 'min_data_in_leaf': 40, 'feature_fraction': 0.7674729616718097, 'lambda_l1': 0.01898454965559412, 'lambda_l2': 4.692232030036839, 'top_rate': 0.3194947877361741, 'other_rate': 0.4966928167965162}
 Best rmse score is: 0.0048567358055995775
@@ -54,6 +59,9 @@ Best cross validation score: 0.9084686082271792
 12. CatBoost (with cpu and r2 metric)
 
 13. XGBoost (with gpu)
+Best XGBoost Hyperparameters: {'n_estimators': 258, 'learning_rate': 0.015710874951168838, 'max_depth': 13, 'min_child_weight': 6, 'subsample': 0.8013086762110558, 'colsample_bytree': 0.5651332518880796, 'gamma': 8.985537926588386e-05, 'reg_alpha': 0.005455600529410867, 'reg_lambda': 0.0056032613738088355}
+Best cross validation rmse score is: 0.006067328688401701
+Corresponding r2 score: 0.866 +- 0.006
 
 14. XGBoost (with gpu_hist) (according to gpt, functionally same as histgb)
 Best XGBoost Hyperparameters: {'n_estimators': 597, 'learning_rate': 0.06432918137707686, 'max_depth': 12, 'min_child_weight': 13, 'subsample': 0.668084348325135, 'colsample_bytree': 0.5495472597692064, 'gamma': 9.707716063981996e-05, 'reg_alpha': 0.0004036303927989072, 'reg_lambda': 0.08584927589324955}
@@ -65,6 +73,88 @@ Best LightGBM Hyperparameters: {'boosting_type': 'goss', 'n_estimators': 208, 'l
 Best cross validation rmse score is: 0.004772339065746232
 Corresponding r2 score: 0.910 +- 0.002
 
+Second run:
+Best LightGBM Hyperparameters: {'boosting_type': 'goss', 'n_estimators': 455, 'learning_rate': 0.06590252752169531, 'num_leaves': 93, 'max_depth': 16, 'min_data_in_leaf': 1, 'feature_fraction': 0.8005115596572518, 'lambda_l1': 0.0009805868187163702, 'lambda_l2': 0.000750368794237795, 'top_rate': 0.13654722193401392, 'other_rate': 0.28440266132863934}
+Best cross validation rmse score is: 0.0045839939536448954
+Cross validation r2 score for LGBMRegressor: 0.918 +- 0.005
+array([0.90928639, 0.91906927, 0.92366707, 0.92051665, 0.91766734])
+
 16. CatBoost (with gpu and rmse as metric becuz r2 is not implemented on gpu)
-Trial 2 finished with value: 0.005620326200408872 and parameters: {'iterations': 951, 'learning_rate': 0.16335650868534068, 'depth': 9, 'l2_leaf_reg': 8.524969214975988, 'bagging_temperature': 0.9886639390498637, 'border_count': 113, 'random_strength': 1.15059031650201, 'leaf_estimation_iterations': 5, 'min_data_in_leaf': 19}. Best is trial 2 with value: 0.005620326200408872.
+Best CatBoost Hyperparameters: {'boosting_type': 'Plain', 'grow_policy': 'Depthwise', 'score_function': 'NewtonCosine', 'iterations': 673, 'learning_rate': 0.022908621641815195, 'depth': 11, 'l2_leaf_reg': 1.3801943751413097, 'border_count': 109, 'random_strength': 1.47617423107477, 'leaf_estimation_iterations': 9, 'min_data_in_leaf': 3, 'feature_border_type': 'GreedyLogSum', 'bootstrap_type': 'Bernoulli', 'subsample': 0.6750907917336698}
+Best rmse score is: 0.004227078934791071
+
+Second run:
+Best CatBoost Hyperparameters: {'boosting_type': 'Plain', 'grow_policy': 'Depthwise', 'score_function': 'SolarL2', 'iterations': 723, 'learning_rate': 0.0323276389295443, 'depth': 12, 'l2_leaf_reg': 0.6945383347479094, 'border_count': 180, 'random_strength': 6.688610790821268, 'leaf_estimation_iterations': 6, 'min_data_in_leaf': 23, 'feature_border_type': 'MinEntropy', 'bootstrap_type': 'Poisson', 'subsample': 0.8373264108411171}
+Best rmse score is: 0.004210702665206214
+Cross validation r2 score is: 0.933 +- 0.003
+
+Final:
+histgb_params = {
+    'max_iter': 827, 
+    'learning_rate': 0.04098138314325556, 
+    'max_leaf_nodes': 195, 
+    'min_samples_leaf': 3, 
+    'l2_regularization': 0.0012330838337428836, 
+    'max_bins': 255, 
+    'max_depth': 17,
+    "scoring": "r2",
+}
+
+lgbm_params = {
+    'boosting_type': 'goss', 
+    'n_estimators': 455, 
+    'learning_rate': 0.06590252752169531, 
+    'num_leaves': 93, 
+    'max_depth': 16, 
+    'min_data_in_leaf': 1, 
+    'feature_fraction': 0.8005115596572518, 
+    'lambda_l1': 0.0009805868187163702, 
+    'lambda_l2': 0.000750368794237795, 
+    'top_rate': 0.13654722193401392, 
+    'other_rate': 0.28440266132863934,
+    "metric": "rmse",
+    "device_type": "gpu",
+    "random_state": 42,
+    "verbose": -1,
+}
+
+ada_params = {
+    'n_estimators': 396, 
+    'learning_rate': 0.241269347132887, 
+    'loss': 'square', 
+    'max_depth': 10, 
+    'min_samples_split': 5, 
+    'min_samples_leaf': 2
+}
+
+cb_params = {
+    'boosting_type': 'Plain',
+    'grow_policy': 'Depthwise', 
+    'score_function': 'SolarL2', 
+    'iterations': 723, 
+    'learning_rate': 0.0323276389295443, 
+    'depth': 12, 
+    'l2_leaf_reg': 0.6945383347479094, 
+    'border_count': 180, 
+    'random_strength': 6.688610790821268, 
+    'leaf_estimation_iterations': 6,
+    'min_data_in_leaf': 23, 
+    'feature_border_type': 'MinEntropy', 
+    'bootstrap_type': 'Poisson', 
+    'subsample': 0.8373264108411171,
+    "eval_metric": "RMSE",
+    "loss_function": "RMSE",
+    "task_type": "GPU"
+}
+
+5-fold OOF Predictions:
+The mean R2 score for HistGB is 0.928407045773888
+The mean R2 score for AdaBoost is 0.9078994296158553
+The mean R2 score for LightGBM is 0.9197989653335246
+The mean R2 score for CatBoost is 0.9323206729934256
+
+Weights before scaling: [0.5136977512811197, 0.259115893192964, 5.902687125515622e-16, 0.8682494898881506]
+Weights after scaling: [0.31302741529243944, 0.15789513990493972, 3.5968677876671564e-16, 0.5290774448026204]
+Final weights: [0.31302741529243944, 0.15789513990493972, 3.5968677876671564e-16, 0.5290774448026204]
+
 
