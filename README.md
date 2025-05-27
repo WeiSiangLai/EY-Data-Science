@@ -13,6 +13,52 @@ The team consists of [Wei Siang](https://github.com/WeiSiangLai) and I. The over
 ### Part 1: Feature Engineering 🛠️
 This is basically three steps: feature selection, generation, and data cleaning
 
+These are the list of provided features:
+1. Weather data collected from 2 weather stations in Bronx and Manhattan.
+   - Air Temperature at Surface
+   - Relative Humidity
+   - Wind speed and direction
+   - Solar flux
+2. Satellite data derived from Sentinel-2 and Landsat sensors
+   - Spectral Bands
+   - Normalized Difference Vegetation Index (NDVI)
+   - Normalized Built-up Index (NDBI)
+   - Normalized Difference Water Index (NDWI)
+   - Land Surface Temperature (LST)
+3. Longitude and latitude in New York as predictor, UHI Index as the target
+
+#### Step 1: Feature selection
+We chose not to use weather data at all since it is heavily dependent on time, which is not part of the predictor. 
+
+We tried different combinations of the satellite features, including some and excluding the others in each iteration.
+
+This is the list of original features that we went with in our final model:
+- B01 (Coastal aerosol)               
+- B8A (Narrow Near Infrared)            
+- B11 (Short-Wave Infrared 1)            
+- B12 (Short-Wave Infrared 2)          
+- LST                  
+- NDVI                 
+- NDBI                 
+- NDWI                 
+
+#### Step 2: Feature generation
+We explored OpenStreetMap API ([Overpass](https://wiki.openstreetmap.org/wiki/Map_features)) and added additional features taken from the API.
+
+The helpful features we added:
+- Building height (we made a box around the coordinate and counted the number of buildings taller than a certain height)
+- Building density (same as above but include short buildings as well)
+- Presence(number) of water space (rivers, lakes, ponds, etc.)
+- Presence(number) of green space (parks, woods, grassy fields)
+- Road density 
+
+For all of the above features, we made a box around the coordinate and counted the number/area of the feature in the bounding box. Building related features seemed to be the most important to predicting UHI index.
+
+We also tried OpenFE to generate combinations of features but found that it yielded negligible returns, so we did not use it in the end.
+
+#### Step 3: Data cleaning
+We removed rows with missing targets and duplicate coordinates. 
+
 ### Part 2: Model Selection and Ensembling 🤖
 There is a rule stating that automated machine learning methods are not allowed, so AutoML libraries like AutoGluon are out of the question.
 
@@ -25,8 +71,8 @@ To select the best models, we try each of the models with the following procedur
 
 We experimented with various traditional ML methods such as Linear Regression, Lasso and Ridge Regression, Polynomial Regression, KNN Regression and Support Vector Regression. However, all of these are consistently outperformed by gradient boosting methods such as Histogram Gradient Boosting, XGBoost, LightGBM and CatBoost. 
 
-
+For our final model, we did a weighted ensemble of XGBoost, CatBoost and LightGBM using Optuna to fine tune the weights.
 
 ## Results 📊
-0.9772 R^2 score, Top 20 out of 300+ teams.
+0.9772 R<sup>2</sup> score, Top 20 out of 300+ teams.
 
