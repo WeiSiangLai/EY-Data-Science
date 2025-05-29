@@ -74,5 +74,5 @@ We experimented with various traditional ML methods such as Linear Regression, L
 For our final model, we did a weighted ensemble of XGBoost, CatBoost and LightGBM using Optuna to fine tune the weights.
 
 ## Results 📊
-0.9776 R<sup>2</sup> score, Top 30 out of 300+ teams.
+0.9776 R<sup>2</sup> score, Top 20 out of 300+ teams.
 
